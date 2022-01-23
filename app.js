@@ -2,13 +2,16 @@ const express = require('express')
 const mongoose = require('mongoose')
 const methodOverride = require('method-override');
 const ejs = require('ejs')
+const config = require('config');
+
 const postControllers = require('./controllers/postControllers')
 const pageControllers = require('./controllers/pageControllers')
 
 const app = express()
 
+const dbPasswordConfig = config.get('Database.pasword');
 //connect DB
-mongoose.connect('mongodb+srv://mert:VhJZFmbJa3M2NPdd@cluster0.fbssk.mongodb.net/blog-test-db?retryWrites=true&w=majority', {
+mongoose.connect(`mongodb+srv://mert:${dbPasswordConfig}@cluster0.fbssk.mongodb.net/blog-test-db?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
